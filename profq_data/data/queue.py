@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, data: int) -> None:
         self.data = data
-        self.node = None
+        self.next = None
 
 class Queue:
     def __init__(self) -> None:
@@ -14,7 +14,7 @@ class Queue:
     def peek(self) -> int:
         return self.head.data
     
-    def add(self, data: int):
+    def enqueue(self, data: int):
         node = Node(data)
         if self.tail is not None:
             self.tail.next = node
@@ -24,7 +24,7 @@ class Queue:
         if self.head is None:
             self.head = node
     
-    def remove(self):
+    def dequeue(self):
         data = self.head.data
         self.head = self.head.next
 
