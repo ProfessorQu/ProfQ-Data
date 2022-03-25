@@ -9,7 +9,25 @@ class SinglyLinkedList:
         """The init function
         """
         self.head = None
+
+        self._size = 0
     
+    def peek(self) -> int:
+        """Peek the head value of the linked lsit
+
+        Returns:
+            int: the value of the head
+        """
+        return self.head.data
+    
+    def __len__(self) -> int:
+        """Gets the size of the linked list
+
+        Returns:
+            int: the size of the linked list
+        """
+        return self._size
+
     def push(self, data: int):
         """Prepend the data to the start of the array
 
@@ -20,6 +38,8 @@ class SinglyLinkedList:
 
         new_head.next = self.head
         self.head = new_head
+
+        self._size += 1
 
     def append(self, data: int):
         """Append data to the end of the array
@@ -37,6 +57,8 @@ class SinglyLinkedList:
             current = current.next
 
         current.next = Node(data)
+        
+        self._size += 1
 
     def delete_with_value(self, data: int):
         """Delete a node with a certain value
@@ -47,10 +69,13 @@ class SinglyLinkedList:
         # If the list is empty
         if self.head is None:
             return
+            
 
         # If data from head is equal to data, remove data
         if self.head.data == data:
             self.head = self.head.next
+            self._size -= 1
+            return
         
         # Loop over the list to find the item with the data
         current = self.head
@@ -60,6 +85,33 @@ class SinglyLinkedList:
             # "Skip" the next node
             if current.next.data == data:
                 current.next = current.next.next
-                return
+                break
             
             current = current.next
+            
+        self._size -= 1
+    
+    def delete_at_index(self, index: int) -> int:
+        # If the list is empty
+        if self.head is None:
+            return
+        
+        if index < 0 or index > self._size - 1:
+            raise IndexError(f"Index {index} not in linked list {self}")
+
+        # If data from head is equal to data, remove data
+        if index == 0:
+            self.head = self.head.next
+            self._size -= 1
+            return
+
+        # Loop over the list to find the item with the data
+        current = self.head
+
+        for _ in range(index):
+            current = current.next
+
+        current.next = current.next.next
+        
+        self._size -= 1
+        
