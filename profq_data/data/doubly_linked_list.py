@@ -1,4 +1,4 @@
-from profq_data.data.linked_list import LinkedList
+from profq_data.helpers.linked_list import LinkedList
 from profq_data.helpers.node import Node
 
 class DoublyLinkedList(LinkedList):
