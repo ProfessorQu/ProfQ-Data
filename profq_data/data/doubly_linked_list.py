@@ -1,6 +1,6 @@
 from profq_data.helpers.node import Node
 
-class SinglyLinkedList:
+class DoublyLinkedList:
     """An implementation of a singly linked list
     """
     def __init__(self) -> None:
@@ -36,6 +36,8 @@ class SinglyLinkedList:
 
         # Point the new head to the previous head
         new_head.next = self.head
+        # Point the previous head to the new head
+        new_head.prev = self.head
         # Set the new head
         self.head = new_head
 
@@ -58,6 +60,8 @@ class SinglyLinkedList:
 
         # Add the new node
         current.next = Node(data)
+        # Set the next's previous
+        current.next.prev = current
         
         self._size += 1
 
@@ -70,10 +74,11 @@ class SinglyLinkedList:
         # If the list is empty
         if self.head is None:
             return
-
+            
         # If data from head is equal to data, remove data
         if self.head.data == data:
             self.head = self.head.next
+            self.head.prev = None
             self._size -= 1
             return
         
@@ -85,6 +90,8 @@ class SinglyLinkedList:
             # "Skip" the next node
             if current.next.data == data:
                 current.next = current.next.next
+                if current.next is not None:
+                    current.next.prev = current
                 break
             
             current = current.next
@@ -103,6 +110,8 @@ class SinglyLinkedList:
         # If data from head is equal to data, remove data
         if index == 0:
             self.head = self.head.next
+            if self.head is not None:
+                self.head.prev = None
             self._size -= 1
             return
 
@@ -114,6 +123,7 @@ class SinglyLinkedList:
         # Reroute the next to the next next
         # "Skip" the next node
         current.next = current.next.next
+        current.next.prev = None
         
         self._size -= 1
         
