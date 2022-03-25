@@ -1,5 +1,5 @@
 from profq_data.helpers.linked_list import LinkedList
-from profq_data.helpers.node import Node
+from profq_data.helpers.nodes.linked_list_node import Node
 
 class SinglyLinkedList(LinkedList):
     """An implementation of a singly linked list

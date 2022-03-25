@@ -1,4 +1,4 @@
-from profq_data.helpers.node import Node
+from profq_data.helpers.nodes.stackqueue_node import Node
 
 class Stack:
     """An implementation of the Stack data structure

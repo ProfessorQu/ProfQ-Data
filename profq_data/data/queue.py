@@ -1,4 +1,4 @@
-from profq_data.helpers.node import Node
+from profq_data.helpers.nodes.stackqueue_node import Node
 
 class Queue:
     """An implementation of the Queue data structure
