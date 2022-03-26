@@ -12,6 +12,14 @@ class HashTable:
         self._size = 0
         self.buckets = [None] * self.capacity
     
+    def __len__(self) -> int:
+        """Return the length of the hash table
+
+        Returns:
+            int: length of the table
+        """
+        return self._size
+    
     def hash(self, key: str) -> int:
         """Hash the key for an index
 
@@ -59,13 +67,56 @@ class HashTable:
         current.next = Node(key, data)
     
     def find(self, key: str) -> int:
-        index = self.hash(key)
+        """Find an item according to a key
 
+        Args:
+            key (str): the key to find the item to
+
+        Returns:
+            int: the data at the key
+        """
+        # Get the node at index
+        index = self.hash(key)
         node = self.buckets[index]
 
+        # Traverse the linked list
         while node is not None and node.key != key:
             node = node.next
 
+        # Now node is the requested data or None
         return None if node is None else node.data
+    
+    def remove(self, key: str) -> int:
+        """Remove an item in the hash table and return the data
+
+        Args:
+            key (str): the key for the data to remove
+
+        Returns:
+            int: the data of the key
+        """
+        # Get the node at index
+        index = self.hash(key)
+        node = self.buckets[index]
+        prev = None
+
+        while node is not None and node.key != key:
+            prev = node
+            node = node.next
+
+        if node is None:
+            return None
+
+        self._size -= 1
+
+        result = node.data
+
+        if prev is None:
+            node = None
+        else:
+            prev.next = prev.next.next
+
+        return result
+            
 
     
