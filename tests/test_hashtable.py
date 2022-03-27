@@ -1,6 +1,4 @@
-from os import link
 import sys
-from typing_extensions import dataclass_transform
 sys.path.append("..")
 
 from profq_data.data.hashtable import HashTable
@@ -12,10 +10,10 @@ def test():
     for _ in range(100):
         table = HashTable()
 
-        key1 = [random.choice(string.ascii_letters) for _ in range(random.randint(2, 100))]
-        key2 = [random.choice(string.ascii_letters) for _ in range(random.randint(2, 100))]
-        key3 = [random.choice(string.ascii_letters) for _ in range(random.randint(2, 100))]
-        key4 = [random.choice(string.ascii_letters) for _ in range(random.randint(2, 100))]
+        key1 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
+        key2 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
+        key3 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
+        key4 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
 
         data1 = random.randint(-100, 100)
         data2 = random.randint(-100, 100)
@@ -43,7 +41,7 @@ def test():
 
         assert table.remove(key3) == data3
         assert len(table) == 2
-        
-        assert table.remove(key1)
+
+        assert table.remove(key1) is None
         assert len(table) == 2
         

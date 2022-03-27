@@ -1,4 +1,5 @@
 from profq_data.helpers.nodes.hashtable_node import Node
+from profq_data.data.singly_linked_list import SinglyLinkedList
 
 INITIAL_CAPACITY = 100
 
@@ -75,18 +76,12 @@ class HashTable:
         Returns:
             int: the data at the key
         """
-        # Get the node at index
-        index = self.hash(key)
-        node = self.buckets[index]
-
-        # Traverse the linked list
-        while node is not None and node.key != key:
-            node = node.next
+        node = self._get_node_by_key(key)
 
         # Now node is the requested data or None
         return None if node is None else node.data
     
-    def remove(self, key: str) -> int:
+    def remove(self, key: str):
         """Remove an item in the hash table and return the data
 
         Args:
@@ -95,28 +90,92 @@ class HashTable:
         Returns:
             int: the data of the key
         """
-        # Get the node at index
-        index = self.hash(key)
-        node = self.buckets[index]
-        prev = None
-
-        while node is not None and node.key != key:
-            prev = node
-            node = node.next
-
+        # Get node by index
+        node = self._get_node_by_key(key)
         if node is None:
             return None
+        
+        # Get the index
+        index = self.hash(key)
+        # Get the node in the list if there is one
+        current = self.buckets[index]
+        
+        # If the node to remove is the first node
+        if current.key == key:
+            self.buckets[index] = current.next
+            # Decrease size
+            self._size -= 1
 
-        self._size -= 1
+            return current.data
+        
+        # Traverse the linked list
+        while current.next is not None:
+            # If we have found the node
+            if current.next.key == key:
+                # Remove the node
+                value = current.next.data
+                current.next = current.next.next
+                # Decrease size
+                self._size -= 1
 
-        result = node.data
-
-        if prev is None:
-            node = None
-        else:
-            prev.next = prev.next.next
-
-        return result
+                return value
             
+            current = current.next
+        
+        return None
+        # Get node by index
+        # index = self.hash(key)
+        # current = self.buckets[index]
 
+        # if current.key == key:
+        #     self._size -= 1
+        #     return current.data
+
+        # # Loop over the list to find the item with the data
+        # while current.next is not None:
+        #     # If next data is equal to data
+        #     # Reroute the next to the next next
+        #     # "Skip" the next node
+        #     if current.next.key == key:
+        #         current.next = current.next.next
+        #         self._size -= 1
+
+        #         return current.data
+                
+        #     current = current.next
     
+    def _get_node_by_key(self, key: str) -> Node:
+        """Get a node by a certain key
+
+        Args:
+            key (str): the key to find the node to
+
+        Returns:
+            Node: the node with the key
+        """
+        # Get node by index
+        index = self.hash(key)
+        result = self.buckets[index]
+
+        # Traverse linked list
+        while result is not None and result.key != key:
+            result = result.next
+
+        # Return node
+        return result
+    
+    def print_items(self):
+        """Print all items in the hash table
+        """
+        for idx, node in enumerate(self.buckets):
+            if node is None:
+                print(f"{idx}: None")
+                continue
+            
+            print(f"{idx}: {node.key}")
+            current = node
+            while current.next is not None:
+                current = current.next
+                print(f"{current.key}")
+        
+        print()
