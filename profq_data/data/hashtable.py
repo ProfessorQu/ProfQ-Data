@@ -123,26 +123,6 @@ class HashTable:
             current = current.next
         
         return None
-        # Get node by index
-        # index = self.hash(key)
-        # current = self.buckets[index]
-
-        # if current.key == key:
-        #     self._size -= 1
-        #     return current.data
-
-        # # Loop over the list to find the item with the data
-        # while current.next is not None:
-        #     # If next data is equal to data
-        #     # Reroute the next to the next next
-        #     # "Skip" the next node
-        #     if current.next.key == key:
-        #         current.next = current.next.next
-        #         self._size -= 1
-
-        #         return current.data
-                
-        #     current = current.next
     
     def _get_node_by_key(self, key: str) -> Node:
         """Get a node by a certain key
