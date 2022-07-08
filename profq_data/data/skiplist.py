@@ -1,43 +1,54 @@
 from profq_data.helpers.linked_list import LinkedList
 from profq_data.helpers.nodes.linked_list_node import Node
+from profq_data.helpers.skiplist_linked_list import SkipList_LinkedList
 
-class SinglyLinkedList(LinkedList):
-    """An implementation of a singly linked list
+import random
+
+class SkipList(LinkedList):
+    """An implementation of a skip list
     """
-    def push(self, data: int):
-        """Prepend the data to the start of the array
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.layer2 = SkipList_LinkedList()
+
+    def insert(self, data: int):
+        """Inserts data at the right place in the list
 
         Args:
-            data (int): the data to prepend
+            data (int): the data to insert
         """
-        new_head = Node(data)
-
-        # Point the new head to the previous head
-        new_head.next = self.head
         
-        # Set the new head
-        self.head = new_head
-
-        self._size += 1
-
-    def append(self, data: int):
-        """Append data to the end of the array
-
-        Args:
-            data (int): the data to append
-        """
+        # If the list is empty
         if self.head is None:
             self.head = Node(data)
+            self.layer2.head = Node(data)
+            self.layer2.head.layer_below = self.head
+            self._size += 1
             return
 
-        # Loop over the array until the end
-        current = self.head
-        while current.next is not None:
-            current = current.next
+        # Traverse the layer2 list to find the right place to insert
+        current2 = self.layer2.head
+        while current2.next is not None and current2.next.data <= data:
+            current2 = current2.next
 
-        # Add the new node
-        current.next = Node(data)
+        # Traverse the list to find the right place to insert
+        current = current2.layer_below
+        while current.next is not None and current.next.data <= data:
+            current = current.next
         
+        # Create a new node
+        new_node = Node(data)
+        new_node.next = current.next
+        current.next = new_node
+
+        # See if the new node should be added to the layer2 list
+        if random.random() < 0.5:
+            new_node2 = Node(data)
+            new_node2.next = current2.next
+            current2.next = new_node2
+            new_node2.layer_below = new_node
+
         self._size += 1
     
     def delete_with_value(self, data: int):
@@ -106,3 +117,10 @@ class SinglyLinkedList(LinkedList):
         current.next = current.next.next
         
         self._size -= 1
+
+    def print_items(self):
+        """Prints the items in the list
+        """
+        self.layer2.print_items()
+        super().print_items()
+

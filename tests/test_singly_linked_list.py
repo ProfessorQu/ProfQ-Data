@@ -1,4 +1,3 @@
-from os import link
 import sys
 sys.path.append("..")
 

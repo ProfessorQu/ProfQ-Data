@@ -1,7 +1,7 @@
 from profq_data.helpers.linked_list import LinkedList
-from profq_data.helpers.nodes.linked_list_node import Node
+from profq_data.helpers.nodes.skiplist_node import Node
 
-class SinglyLinkedList(LinkedList):
+class SkipList_LinkedList(LinkedList):
     """An implementation of a singly linked list
     """
     def push(self, data: int):
