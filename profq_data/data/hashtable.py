@@ -21,7 +21,7 @@ class HashTable:
         """
         return self._size
     
-    def hash(self, key: str) -> int:
+    def _hash(self, key: str) -> int:
         """Hash the key for an index
 
         Args:
@@ -41,7 +41,7 @@ class HashTable:
         
         return hashsum
     
-    def insert(self, key: str, data: int):
+    def put(self, key: str, data: int):
         """Insert an item at key
 
         Args:
@@ -51,7 +51,7 @@ class HashTable:
         # Increase size
         self._size += 1
         # Calculate index
-        index = self.hash(key)
+        index = self._hash(key)
         # Get the node in the list if there is one
         node = self.buckets[index]
 
@@ -96,7 +96,7 @@ class HashTable:
             return None
         
         # Get the index
-        index = self.hash(key)
+        index = self._hash(key)
         # Get the node in the list if there is one
         current = self.buckets[index]
         
@@ -134,7 +134,7 @@ class HashTable:
             Node: the node with the key
         """
         # Get node by index
-        index = self.hash(key)
+        index = self._hash(key)
         result = self.buckets[index]
 
         # Traverse linked list
