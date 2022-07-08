@@ -152,10 +152,11 @@ class HashTable:
                 print(f"{idx}: None")
                 continue
             
-            print(f"{idx}: {node.key}")
+            print(f"{idx}: {node.key}", end="")
             current = node
+            # Print all nodes in the linked list
             while current.next is not None:
                 current = current.next
-                print(f"{current.key}")
+                print(f", {current.key}", end="")
         
         print()

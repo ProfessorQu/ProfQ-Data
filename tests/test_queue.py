@@ -10,6 +10,7 @@ def test():
 
         assert queue.is_empty()
 
+        # ===== Test Enqueue =====
         random_item1 = random.randint(-100, 100)
 
         queue.enqueue(random_item1)
@@ -20,6 +21,7 @@ def test():
         assert queue.peek() == random_item1
         assert queue.tail.data == random_item1
 
+        # ===== Test Enqueue =====
         random_item2 = random.randint(-100, 100)
 
         queue.enqueue(random_item2)
@@ -30,6 +32,7 @@ def test():
         assert queue.peek() == random_item1
         assert queue.tail.data == random_item2
 
+        # ===== Test Dequeue =====
         assert queue.dequeue() == random_item1
         assert queue.dequeue() == random_item2
         assert queue.is_empty()

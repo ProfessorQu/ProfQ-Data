@@ -10,16 +10,19 @@ def test():
     for _ in range(100):
         table = HashTable()
 
+        # ===== Keys =====
         key1 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
         key2 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
         key3 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
         key4 = "".join(random.choices(string.ascii_letters, k=random.randint(2, 100)))
 
+        # ===== Data =====
         data1 = random.randint(-100, 100)
         data2 = random.randint(-100, 100)
         data3 = random.randint(-100, 100)
         data4 = random.randint(-100, 100)
 
+        # ===== Test Put =====
         table.put(key1, data1)
         assert table.find(key1) == data1
         assert len(table) == 1
@@ -28,9 +31,11 @@ def test():
         assert table.find(key2) == data2
         assert len(table) == 2
 
+        # ===== Test Remove =====
         assert table.remove(key1) == data1
         assert len(table) == 1
 
+        # ===== Test Put =====
         table.put(key3, data3)
         assert table.find(key3) == data3
         assert len(table) == 2
@@ -39,6 +44,7 @@ def test():
         assert table.find(key4) == data4
         assert len(table) == 3
 
+        # ===== Test Remove =====
         assert table.remove(key3) == data3
         assert len(table) == 2
 
@@ -51,11 +57,13 @@ def test():
         assert table.remove(key4) == data4
         assert len(table) == 0
 
+        # ===== Test Find =====
         assert table.find(key1) is None
         assert table.find(key2) is None
         assert table.find(key3) is None
         assert table.find(key4) is None
 
+        # ===== Test Hash Collision =====
         table.put("a", 1)
         table.put("b", 2)
 
@@ -64,6 +72,6 @@ def test():
         
         assert table.remove("a") == 1
         assert table.find("a") is None
-        assert table.find("b") == 2
+        
         assert table.remove("b") == 2
         assert table.find("b") is None
