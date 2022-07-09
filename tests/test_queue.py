@@ -11,30 +11,30 @@ def test():
         assert queue.is_empty()
 
         # ===== Test Enqueue =====
-        random_item1 = random.randint(-100, 100)
+        data1 = random.randint(-100, 100)
 
-        queue.enqueue(random_item1)
+        queue.enqueue(data1)
 
         assert not queue.is_empty()
 
-        assert queue.head.data == random_item1
-        assert queue.peek() == random_item1
-        assert queue.tail.data == random_item1
+        assert queue.head.data == data1
+        assert queue.peek() == data1
+        assert queue.tail.data == data1
 
         # ===== Test Enqueue =====
-        random_item2 = random.randint(-100, 100)
+        data2 = random.randint(-100, 100)
 
-        queue.enqueue(random_item2)
+        queue.enqueue(data2)
 
         assert not queue.is_empty()
 
-        assert queue.head.data == random_item1
-        assert queue.peek() == random_item1
-        assert queue.tail.data == random_item2
+        assert queue.head.data == data1
+        assert queue.peek() == data1
+        assert queue.tail.data == data2
 
         # ===== Test Dequeue =====
-        assert queue.dequeue() == random_item1
-        assert queue.dequeue() == random_item2
+        assert queue.dequeue() == data1
+        assert queue.dequeue() == data2
         assert queue.is_empty()
 
     
