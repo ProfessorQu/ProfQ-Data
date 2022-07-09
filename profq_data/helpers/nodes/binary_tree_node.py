@@ -54,6 +54,19 @@ class Node:
         
         # Return the final node
         return node
+    
+    def height(self, node: Any) -> int:
+        """Get the height of a binary tree
+
+        Args:
+            node (Node): the node to start from
+
+        Returns:
+            int: the height of the tree
+        """
+        if node is None:
+            return 0
+        return 1 + max(self.height(node.left), self.height(node.right))
 
     def contains(self, node: Any, value: int) -> bool:
         """Tests if the binary tree contains a value
@@ -144,7 +157,7 @@ class Node:
         """
         if node is not None:
             self.inorder(node.left)
-            print(node.key, end=" ")
+            print(node.data, end=" ")
             self.inorder(node.right)
     
     def preorder(self, node: Any):
@@ -156,7 +169,7 @@ class Node:
         if node is not None:
             self.inorder(node.left)
             self.inorder(node.right)
-            print(node.key, end=" ")
+            print(node.data, end=" ")
     
     def postorder(self, node: Any):
         """Go through a binary tree postorder (Right, Left, Root)
@@ -165,6 +178,6 @@ class Node:
             node (Node): the node to start from
         """
         if node is not None:
-            print(node.key, end=" ")
+            print(node.data, end=" ")
             self.inorder(node.left)
             self.inorder(node.right)

@@ -1,6 +1,7 @@
-from profq_data.helpers.nodes.binary_tree_node import Node
+from profq_data.helpers.nodes.redblack_tree_node import Node
+from profq_data.data.binary_tree import BinaryTree
 
-class BinaryTree:
+class RedBlackTree(BinaryTree):
     """An implementation of a binary tree
     """
     def __init__(self) -> None:
@@ -30,7 +31,8 @@ class BinaryTree:
         """
         if self.root is None:
             self.root = Node(value)
-            return self.root
+            self.root.color = "black"
+            return
 
         self.root = self.root.insert(self.root, value)
     
@@ -48,32 +50,30 @@ class BinaryTree:
     def delete(self, value: int):
         self.root = self.root.delete(self.root, value)
 
+    def rotate_left(self):
+        """Rotate a node to the left
+        """
+        self.root = self.root.rotate_left(self.root)
+    
+    def rotate_right(self):
+        """Rotate a node to the right
+        """
+        self.root = self.root.rotate_right(self.root)
+
     def inorder(self):
         """Go through a binary tree inorder (Left, Root, Right)
         """
-        self.root = self.root.inorder(self.root)
+        self.root.inorder(self.root)
         print()
     
     def preorder(self):
         """Go through a binary tree preorder (Root, Left, Right)
-
-        Args:
-            node (Node): the node to start from
         """
-        self.root = self.root.preorder(self.root)
+        self.root.preorder(self.root)
         print()
     
     def postorder(self):
         """Go through a binary tree postorder (Right, Left, Root)
-
-        Args:
-            node (Node): the node to start from
         """
-        self.root = self.root.postorder(self.root)
+        self.root.postorder(self.root)
         print()
-    
-    @property
-    def height(self) -> int:
-        """The height of the tree
-        """
-        return self.root.height(self.root)
