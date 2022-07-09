@@ -1,5 +1,4 @@
 from profq_data.helpers.nodes.hashtable_node import Node
-from profq_data.data.singly_linked_list import SinglyLinkedList
 
 INITIAL_CAPACITY = 100
 
