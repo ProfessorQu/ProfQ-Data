@@ -10,7 +10,7 @@ import profq_data
 
 Then you have access to all kinds of [data structures](<#data-structures>).
 
-For example, a queue:
+For example, a [queue](#queue):
 
 ```python
 from profq_sorting import Queue
@@ -37,7 +37,7 @@ There are many more data structures which I have implemented, but here is a few 
 from profq_sorting import BinaryTree
 ```
 
-A Binary tree is a data structure in which you can input numbers and it will put them at a certain spot. Every node has a right child and a left child, the idea is that every node that is smaller than the parent, will be on the left and every nod that's bigger, on the right. This implementation has no balancing, so it can be quite ineffecient.
+A binary tree is a data structure in which you can input numbers and it will put them at a certain spot. Every node has a right child and a left child, the idea is that every node that is smaller than the parent, will be on the left and every nod that's bigger, on the right. This implementation has no balancing, so it can be quite ineffecient.
 
 ### Hash Table
 
@@ -53,7 +53,7 @@ This data structure uses a hashing function to determine an index in where it sh
 from profq_sorting import Heap
 ```
 
-A heap is kind of like a binary tree, in that it has a tree-like architecture. It is implemented however with an array. It uses some formulas to see what items are parents and children of each other. Also, it ensures that the minimum element is always on top, and when an item gets added, the tree is always filled left to right.
+A heap is kind of like a [binary tree](#binary-tree), in that it has a tree-like architecture. It is implemented however with an array. It uses some formulas to see what items are parents and children of each other. Also, it ensures that the minimum element is always on top, and when an item gets added, the tree is always filled left to right.
 
 ### Queue
 
