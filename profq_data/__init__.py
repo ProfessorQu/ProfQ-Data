@@ -1,6 +1,3 @@
-# import sys
-# sys.path.append("..")
-
 from profq_data.data.binary_tree import BinaryTree
 from profq_data.data.doubly_linked_list import DoublyLinkedList
 from profq_data.data.singly_linked_list import SinglyLinkedList
